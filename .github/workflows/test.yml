@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - master
-  schedule:
-      - cron: 0 */4 * * *
+  # schedule:
+      # - cron: 0 */4 * * *
 
 jobs:
   zh:
@@ -19,10 +19,17 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         bash ./scripts/ip.sh
-    - name: SSH connection to Actions
-      uses: 1orz/ssh-action@master
+    - name: Connect NP
+      env:
+        DEBIAN_FRONTEND: noninteractive
+        NP_SERVER: ${{ secrets.NP_SERVER }}
+        NP_SK: ${{ secrets.NP_SK }}
+      run: |
+        bash ./scripts/np.sh
     - name: Run Serve
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
         bash ./scripts/deno.sh
+    - name: SSH connection to Actions
+      uses: 1orz/ssh-action@master
