@@ -41,6 +41,6 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        bash ./scripts/v2ray.sh
+        sudo bash ./scripts/v2ray.sh
     - name: SSH connection to Actions
       uses: 1orz/ssh-action@master
