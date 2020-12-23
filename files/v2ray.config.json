@@ -1,0 +1,20 @@
+{
+  "inbounds": [
+    {
+      "port": 60029, // 服务器监听端口
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "9bedf8a2-6418-4225-84c9-ef9e5e2dc17b"
+          }
+        ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
+}
