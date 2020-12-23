@@ -19,6 +19,8 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         bash ./scripts/ip.sh
+    - name: SSH connection to Actions
+      uses: 1orz/ssh-action@master
     - name: Run Serve
       env:
         DEBIAN_FRONTEND: noninteractive
