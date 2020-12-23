@@ -14,8 +14,13 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
-    - name: Prepare environment.
+    - name: Get Ip
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        bash ./scripts/env.sh
+        bash ./scripts/ip.sh
+    - name: Run Serve
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        bash ./scripts/deno.sh
