@@ -24,7 +24,7 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
         MC_SK: ${{ secrets.MC_SK }}
       run: |
-        sudo bash ./scripts/env.sh
+        sudo bash ./scripts/env.sh "$MC_SK"
     - name: Connect NP
       env:
         DEBIAN_FRONTEND: noninteractive
