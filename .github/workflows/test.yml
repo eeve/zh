@@ -1,0 +1,21 @@
+name: ZH
+on:
+  push:
+    branches:
+      - master
+  schedule:
+      - cron: 0 */4 * * *
+
+jobs:
+  zh:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+    - name: Prepare environment.
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        bash ./scripts/env.sh
