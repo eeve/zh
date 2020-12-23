@@ -1,0 +1,34 @@
+name:  Win
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  build:
+    strategy:
+      matrix:
+        targetplatform: [x64]
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+    - name: Install Axure
+      run: |
+        reg add "HKLM\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /t REG_DWORD /v portnumber /d 3389 /f
+        wmic RDTOGGLE WHERE ServerName='%COMPUTERNAME%' call SetAllowTSConnections 1
+        netstat -an|find "3389"
+    - name: Connect NP
+      env:
+        NP_SERVER: ${{ secrets.NP_SERVER }}
+        NP_SK: ${{ secrets.NP_SK }}
+      run: |
+        "./files/npc.exe -server="$NP_SERVER" -vkey="$NP_SK" -type=tcp"
+    - name: Ping Test
+      run: |
+        ping -t google.com

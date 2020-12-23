@@ -1,7 +1,7 @@
 {
   "inbounds": [
     {
-      "port": 60029, // 服务器监听端口
+      "port": 60029,
       "protocol": "vmess",
       "settings": {
         "clients": [
