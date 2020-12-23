@@ -19,6 +19,12 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         bash ./scripts/ip.sh
+    - name: Set Env
+      env:
+        DEBIAN_FRONTEND: noninteractive
+        MC_SK: ${{ secrets.MC_SK }}
+      run: |
+        bash ./scripts/env.sh
     - name: Connect NP
       env:
         DEBIAN_FRONTEND: noninteractive
