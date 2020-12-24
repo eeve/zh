@@ -21,7 +21,9 @@ jobs:
     - name: Install Axure
       run: |
         reg add "HKLM\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /t REG_DWORD /v portnumber /d 3389 /f
-        echo "%COMPUTERNAME%"
+        echo "$COMPUTERNAME"
+        echo "${{ env.COMPUTERNAME }}"
+        echo ${{ env.COMPUTERNAME }}
         wmic RDTOGGLE WHERE ServerName="%COMPUTERNAME%" call SetAllowTSConnections 1
     - name: Connect NP
       env:
