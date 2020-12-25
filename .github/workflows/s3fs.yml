@@ -25,6 +25,7 @@ jobs:
         OSS_SK: ${{ secrets.OSS_SK }}
         OSS_SERVER: ${{ secrets.OSS_SERVER }}
       run: |
-        sudo bash ./scripts/oss/env.sh "$OSS_SK" "$OSS_SERVER"
+        sudo apt install s3fs -y
+        bash ./scripts/oss/env.sh "$OSS_SK" "$OSS_SERVER"
     - name: SSH connection to Actions
       uses: 1orz/ssh-action@master
