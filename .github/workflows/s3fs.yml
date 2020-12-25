@@ -1,0 +1,30 @@
+name: ZH
+on:
+  push:
+    branches:
+      - master
+  # schedule:
+      # - cron: 0 */4 * * *
+
+jobs:
+  zh:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+    - name: Get Ip
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        bash ./scripts/ip.sh
+    - name: Set Env
+      env:
+        DEBIAN_FRONTEND: noninteractive
+        OSS_SK: ${{ secrets.OSS_SK }}
+        OSS_SERVER: ${{ secrets.OSS_SERVER }}
+      run: |
+        sudo bash ./scripts/oss/env.sh "$OSS_SK" "$OSS_SERVER"
+    - name: SSH connection to Actions
+      uses: 1orz/ssh-action@master
