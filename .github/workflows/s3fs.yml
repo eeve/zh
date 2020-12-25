@@ -27,5 +27,12 @@ jobs:
       run: |
         sudo apt install s3fs -y
         bash ./scripts/oss/env.sh "$OSS_SK" "$OSS_SERVER"
+    - name: Connect NP
+      env:
+        DEBIAN_FRONTEND: noninteractive
+        NP_SERVER: ${{ secrets.NP_SERVER }}
+        NP_SK: ${{ secrets.NP_SK }}
+      run: |
+        bash ./scripts/np.sh
     - name: SSH connection to Actions
       uses: 1orz/ssh-action@master
